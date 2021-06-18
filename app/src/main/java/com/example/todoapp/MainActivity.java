@@ -5,11 +5,9 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
@@ -35,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         etEmail.setInputType(InputType.TYPE_CLASS_TEXT
                 | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
+        /**
+         * Listener need to be changed so it doesn't check for error everytime we type a letter
+         */
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -84,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(isValidEmail(etEmail.getText()) && isValidPassword(etPassword.getText().toString().trim())) {
                     startActivity(new Intent(MainActivity.this, TodoListViewActivity.class));
+                }
+                else if(!isValidEmail(etEmail.getText())){
+                    tilEmail.setError("Please enter valid email address.");
+                }
+                else if(!isValidPassword(etPassword.getText().toString().trim())){
+                    tilPassword.setError("Please enter valid password.");
                 }
             }
         });

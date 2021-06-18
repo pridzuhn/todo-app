@@ -3,14 +3,9 @@ package com.example.todoapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
-import android.text.TextUtils;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView.OnItemClickListener;
-
 import java.util.ArrayList;
 
 
@@ -20,6 +15,7 @@ public class TodoListViewActivity extends AppCompatActivity {
     private ArrayAdapter<String> itemsAdapter;
     private ListView listView;
     private Button button;
+    private DatabaseHelper myDB;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,6 +24,7 @@ public class TodoListViewActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         button = findViewById(R.id.button2);
+        myDB = new DatabaseHelper(TodoListViewActivity.this);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
