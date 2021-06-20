@@ -16,10 +16,10 @@ public class Todo {
     public String description;
 
     @ColumnInfo(name = "finished")
-    public int isFinished;
+    public boolean isFinished;
 
     @ColumnInfo(name = "favorite")
-    public int isFavorite;
+    public boolean isFavorite;
 
     @ColumnInfo(name = "due_date")
     public long dueDate;
