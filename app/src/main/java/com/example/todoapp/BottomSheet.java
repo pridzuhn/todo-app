@@ -14,6 +14,7 @@ import com.example.todoapp.model.SharedViewModel;
 import com.example.todoapp.model.TodoViewModel;
 import com.example.todoapp.util.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
@@ -84,17 +85,26 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
 
         saveButton.setOnClickListener(view1 -> {
             String todo = enterTodo.getText().toString().trim();
-            if(!TextUtils.isEmpty(todo) && dueDate != null){
+
+            if(!TextUtils.isEmpty(todo) && dueDate != null) {
                 Todo myTodo = new Todo(todo, "lore ipsum", false, true,
                         dueDate);
-                if(isEdit){
+
+                if (isEdit) {
                     Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
                     updateTodo.setTask(todo);
                     TodoViewModel.update(updateTodo);
                     sharedViewModel.setIsEdit(false);
+                } else {
+                    TodoViewModel.insert(myTodo);
                 }
-                else TodoViewModel.insert(myTodo);
+
+                enterTodo.setText("");
+                if(this.isVisible()){
+                    this.dismiss();
+                }
             }
+        //    else {Snackbar.make(saveButton, R.string.empty_field, Snackbar.LENGTH_LONG).show();}
 
         });
     }
