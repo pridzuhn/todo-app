@@ -19,8 +19,12 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private final List<Todo> taskList;
-    public RecyclerViewAdapter(List<Todo> taskList) {
+    private final OnTodoClickListener todoClickListener;
+
+    public RecyclerViewAdapter(List<Todo> taskList, OnTodoClickListener todoClickListener) {
         this.taskList = taskList;
+        this.todoClickListener = todoClickListener;
+
     }
 
 
@@ -45,15 +49,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return taskList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
         public AppCompatRadioButton radioButton;
         public AppCompatTextView task;
         public Chip todayChip;
+
+        OnTodoClickListener onTodoClickListener;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             radioButton = itemView.findViewById(R.id.todo_radio_button);
             task = itemView.findViewById(R.id.todo_row_todo);
             todayChip = itemView.findViewById(R.id.todo_row_chip);
+            this.onTodoClickListener = todoClickListener;
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            int id = view.getId();
+            if (id == R.id.todo_row_layout){
+                Todo currTodo = taskList.get(getAdapterPosition());
+                onTodoClickListener.onTodoClick(getAdapterPosition(), currTodo);
+            }
         }
     }
 }

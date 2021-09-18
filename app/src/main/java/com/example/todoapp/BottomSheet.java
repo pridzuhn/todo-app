@@ -20,8 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Calendar;
+import java.util.Date;
 
-public class BottomSheet extends BottomSheetDialogFragment {
+public class BottomSheet extends BottomSheetDialogFragment implements View.OnClickListener {
 
     private EditText enterTodo;
     private ImageButton calendarButton;
@@ -31,6 +32,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     // private RadioButton selectedRadioButton;
     // private int selectedButtonId;
     private CalendarView calendarView;
+    private Date dueDate;
+    Calendar calendar = Calendar.getInstance();
     // private Group calendarGroup;
 
     public BottomSheet() {
@@ -55,16 +58,27 @@ public class BottomSheet extends BottomSheetDialogFragment {
         calendarButton.setOnClickListener(view12 -> {
             calendarView.setVisibility(
                      calendarView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-
         });
+
+        calendarView.setOnDateChangeListener((view13, year, month, dayOfMonth) -> {
+            calendar.clear();
+            calendar.set(year, month, dayOfMonth);
+            dueDate = calendar.getTime();
+        });
+
         saveButton.setOnClickListener(view1 -> {
             String todo = enterTodo.getText().toString().trim();
-            if(!TextUtils.isEmpty(todo)){
+            if(!TextUtils.isEmpty(todo) && dueDate != null){
                 Todo myTodo = new Todo(todo, "lore ipsum", false, true,
-                        Calendar.getInstance().getTime());
+                        dueDate);
                 TodoViewModel.insert(myTodo);
             }
 
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        // TODO duedates for today tomorrow next week, if wanted (2:10)
     }
 }
