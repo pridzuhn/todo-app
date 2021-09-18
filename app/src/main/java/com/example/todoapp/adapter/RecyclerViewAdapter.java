@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapp.R;
 import com.example.todoapp.Todo;
+import com.example.todoapp.util.Utils;
 import com.google.android.material.chip.Chip;
 
 import java.util.List;
@@ -34,8 +35,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Todo todo = taskList.get(position);
-
+        String formatted = Utils.formatDate(todo.getDueDate());
         holder.task.setText(todo.getTask());
+        holder.todayChip.setText(formatted);
     }
 
     @Override
