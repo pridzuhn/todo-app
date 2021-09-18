@@ -25,12 +25,14 @@ public class TodoListViewActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
+    private int counter;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.todolistview);
+        counter = 0;
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -48,7 +50,7 @@ public class TodoListViewActivity extends AppCompatActivity {
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            Todo todo = new Todo("Todo", "Description", false, false,
+            Todo todo = new Todo("Todo " + counter++, "Description", false, false,
                     Calendar.getInstance().getTime());
 
             TodoViewModel.insert(todo);
