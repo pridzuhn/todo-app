@@ -77,6 +77,7 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
     @Override
     public void onTodoClick(Todo todo) {
         sharedViewModel.selectItem(todo);
+        sharedViewModel.setIsEdit(true);
         // Log.d("Click", "onTodoClick: " + todo);
         showBottomSheetDialog();
     }

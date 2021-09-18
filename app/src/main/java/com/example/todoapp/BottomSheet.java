@@ -33,6 +33,7 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
     private Date dueDate;
     Calendar calendar = Calendar.getInstance();
     private SharedViewModel sharedViewModel;
+    private boolean isEdit;
     // private Group calendarGroup;
 
     public BottomSheet() {
@@ -55,6 +56,7 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
     public void onResume() {
         super.onResume();
         if(sharedViewModel.getSelectedItem().getValue() != null){
+            isEdit = sharedViewModel.getIsEdit();
             Todo todo = sharedViewModel.getSelectedItem().getValue();
             enterTodo.setText(todo.getTask());
             Log.d("MY", "onViewCreated" + todo.getTask());
@@ -83,7 +85,13 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
             if(!TextUtils.isEmpty(todo) && dueDate != null){
                 Todo myTodo = new Todo(todo, "lore ipsum", false, true,
                         dueDate);
-                TodoViewModel.insert(myTodo);
+                if(isEdit){
+                    Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
+                    updateTodo.setTask(todo);
+                    TodoViewModel.update(updateTodo);
+                    sharedViewModel.setIsEdit(false);
+                }
+                else TodoViewModel.insert(myTodo);
             }
 
         });
