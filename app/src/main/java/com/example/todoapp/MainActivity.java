@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextInputLayout tilEmail, tilPassword;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -33,9 +33,7 @@ public class MainActivity extends AppCompatActivity {
         etEmail.setInputType(InputType.TYPE_CLASS_TEXT
                 | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
-        /**
-         * Listener need to be changed so it doesn't check for error everytime we type a letter
-         */
+
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {

@@ -3,66 +3,45 @@ package com.example.todoapp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
+import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class TodoListViewActivity extends AppCompatActivity {
 
-    private ArrayList<String> items;
-    private ArrayAdapter<String> itemsAdapter;
-    private ListView listView;
-    private Button button;
-    private DatabaseHelper myDB;
+    private static final String TAG = "ITEM";
+    private TodoViewModel todoViewModel;
+    private FloatingActionButton fab;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.todolistview);
+        todoViewModel = new ViewModelProvider.AndroidViewModelFactory(
+                TodoListViewActivity.this.getApplication())
+                .create(TodoViewModel.class);
 
-        listView = findViewById(R.id.listView);
-        button = findViewById(R.id.button2);
-        myDB = new DatabaseHelper(TodoListViewActivity.this);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addItem(view);
+        todoViewModel.getAllTodos().observe(this, todos -> {
+            for(Todo todo : todos){
+                Log.d(TAG, "onCreate: " + todo.getId());
             }
         });
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            Todo todo = new Todo("Todo", "Description", false, false,
+                    Calendar.getInstance().getTime());
 
-        items = new ArrayList<>();
-        itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
-        listView.setAdapter(itemsAdapter);
-        setUpListViewListener();
-    }
-
-    private void setUpListViewListener() {
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Context context = getApplicationContext();
-                Toast.makeText(context, "Item Removed", Toast.LENGTH_LONG).show();
-
-                items.remove(position);
-                itemsAdapter.notifyDataSetChanged();
-                return true;
-            }
+            TodoViewModel.insert(todo);
         });
     }
 
-    private void addItem(View v) {
-        EditText input = findViewById(R.id.editTextTextPersonName);
-        String itemText = input.getText().toString();
 
-        if(!(itemText.equals(""))){
-            itemsAdapter.add(itemText);
-            input.setText("");
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "Please enter text..", Toast.LENGTH_SHORT).show();
-        }
-    }
 }
