@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapp.adapter.OnTodoClickListener;
 import com.example.todoapp.adapter.RecyclerViewAdapter;
+import com.example.todoapp.model.SharedViewModel;
+import com.example.todoapp.model.TodoViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -20,6 +22,7 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
 
     private static final String TAG = "ITEM";
     private TodoViewModel todoViewModel;
+    private SharedViewModel sharedViewModel;
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -51,6 +54,9 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
             recyclerView.setAdapter(recyclerViewAdapter);
         });
 
+        sharedViewModel = new ViewModelProvider(this)
+                .get(SharedViewModel.class);
+
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -69,8 +75,10 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
 
 
     @Override
-    public void onTodoClick(int adapterPosition, Todo todo) {
-        Log.d("Click", "onTodoClick: " + todo);
+    public void onTodoClick(Todo todo) {
+        sharedViewModel.selectItem(todo);
+        // Log.d("Click", "onTodoClick: " + todo);
+        showBottomSheetDialog();
     }
 
     @Override

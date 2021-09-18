@@ -2,22 +2,20 @@ package com.example.todoapp;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
+import com.example.todoapp.model.SharedViewModel;
+import com.example.todoapp.model.TodoViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.chip.Chip;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.Group;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -34,6 +32,7 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
     private CalendarView calendarView;
     private Date dueDate;
     Calendar calendar = Calendar.getInstance();
+    private SharedViewModel sharedViewModel;
     // private Group calendarGroup;
 
     public BottomSheet() {
@@ -54,7 +53,11 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        if(sharedViewModel.getSelectedItem().getValue() != null){
+            Todo todo = sharedViewModel.getSelectedItem().getValue();
+            Log.d("MY", "onViewCreated" + todo.getTask());
+        }
         calendarButton.setOnClickListener(view12 -> {
             calendarView.setVisibility(
                      calendarView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
