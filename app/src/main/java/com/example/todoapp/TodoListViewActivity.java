@@ -70,11 +70,13 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
 
     @Override
     public void onTodoClick(int adapterPosition, Todo todo) {
-        Log.d("Click", "onTodoClick: " + adapterPosition);
+        Log.d("Click", "onTodoClick: " + todo);
     }
 
     @Override
     public void onTodoRadioButtonClick(Todo todo) {
-        Log.d("Click", "onTodoClick: " + todo);
+        Log.d("Click", "onRadioButtonClick: " + todo);
+        TodoViewModel.delete(todo);
+        recyclerViewAdapter.notifyDataSetChanged();
     }
 }
