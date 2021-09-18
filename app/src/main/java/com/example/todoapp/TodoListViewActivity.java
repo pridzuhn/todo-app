@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.ViewGroup;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +31,6 @@ public class TodoListViewActivity extends AppCompatActivity {
     private RecyclerViewAdapter recyclerViewAdapter;
     private int counter;
     BottomSheet bottomSheet;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
