@@ -51,13 +51,22 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(sharedViewModel.getSelectedItem().getValue() != null){
+            Todo todo = sharedViewModel.getSelectedItem().getValue();
+            enterTodo.setText(todo.getTask());
+            Log.d("MY", "onViewCreated" + todo.getTask());
+        }
+    }
+
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        if(sharedViewModel.getSelectedItem().getValue() != null){
-            Todo todo = sharedViewModel.getSelectedItem().getValue();
-            Log.d("MY", "onViewCreated" + todo.getTask());
-        }
+
+
+
         calendarButton.setOnClickListener(view12 -> {
             calendarView.setVisibility(
                      calendarView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
