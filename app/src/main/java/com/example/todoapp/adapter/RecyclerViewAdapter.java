@@ -3,6 +3,7 @@ package com.example.todoapp.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatRadioButton;
@@ -64,15 +65,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             todayChip = itemView.findViewById(R.id.todo_row_chip);
             this.onTodoClickListener = todoClickListener;
             itemView.setOnClickListener(this);
+            radioButton.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View view) {
+            Todo currTodo = taskList.get(getAdapterPosition());
             int id = view.getId();
             if (id == R.id.todo_row_layout){
-                Todo currTodo = taskList.get(getAdapterPosition());
                 onTodoClickListener.onTodoClick(getAdapterPosition(), currTodo);
+            } else if (id == R.id.todo_radio_button){
+                currTodo = taskList.get(getAdapterPosition());
+                onTodoClickListener.onTodoRadioButtonClick(currTodo);
             }
         }
     }

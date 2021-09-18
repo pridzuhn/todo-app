@@ -47,7 +47,7 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
                 .create(TodoViewModel.class);
 
         todoViewModel.getAllTodos().observe(this, todos -> {
-            recyclerViewAdapter = new RecyclerViewAdapter(todos, this::onTodoClick);
+            recyclerViewAdapter = new RecyclerViewAdapter(todos, this);
             recyclerView.setAdapter(recyclerViewAdapter);
         });
 
@@ -71,5 +71,10 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
     @Override
     public void onTodoClick(int adapterPosition, Todo todo) {
         Log.d("Click", "onTodoClick: " + adapterPosition);
+    }
+
+    @Override
+    public void onTodoRadioButtonClick(Todo todo) {
+        Log.d("Click", "onTodoClick: " + todo);
     }
 }
