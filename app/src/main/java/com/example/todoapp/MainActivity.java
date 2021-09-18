@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
+
+import com.example.todoapp.adapter.RecyclerViewAdapter;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.regex.Pattern;
@@ -18,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText etEmail, etPassword;
     private TextInputLayout tilEmail, tilPassword;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
