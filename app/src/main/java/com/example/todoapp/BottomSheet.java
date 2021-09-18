@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 
 import com.example.todoapp.model.SharedViewModel;
 import com.example.todoapp.model.TodoViewModel;
+import com.example.todoapp.util.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import androidx.annotation.NonNull;
@@ -72,6 +73,7 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
         calendarButton.setOnClickListener(view12 -> {
             calendarView.setVisibility(
                      calendarView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            Utils.hideSoftKeyboard(view12);
         });
 
         calendarView.setOnDateChangeListener((view13, year, month, dayOfMonth) -> {
