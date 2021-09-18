@@ -12,10 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class BottomSheet extends BottomSheetDialogFragment {
+    public BottomSheet() {
+    }
 
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.bottom_sheet, container, false);
+        View view = inflater.inflate(R.layout.bottom_sheet, container, false);
+        return view;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
