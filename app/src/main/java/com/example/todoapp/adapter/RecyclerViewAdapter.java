@@ -10,13 +10,15 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todoapp.R;
-import com.example.todoapp.*;
+import com.example.todoapp.Todo;
 import com.google.android.material.chip.Chip;
+
+import java.util.List;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private final List<Task> taskList;
-    public RecyclerViewAdapter(List<Task> taskList) {
+    private final List<Todo> taskList;
+    public RecyclerViewAdapter(List<Todo> taskList) {
         this.taskList = taskList;
     }
 
@@ -25,15 +27,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.todo_row, parent, attachToRoot: false);
+                .inflate(R.layout.todo_row, parent); // TODO add after parent? attachToRoot: false
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Task task = taskList.get(position);
+        Todo todo = taskList.get(position);
 
-        holder.task.setText(task.getTask());
+        holder.task.setText(todo.getTask());
     }
 
     @Override

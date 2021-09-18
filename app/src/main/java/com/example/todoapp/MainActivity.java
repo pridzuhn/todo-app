@@ -22,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText etEmail, etPassword;
     private TextInputLayout tilEmail, tilPassword;
-    private RecyclerView recyclerView;
-    private RecyclerViewAdapter recyclerViewAdapter;
+
 
 
     @Override
