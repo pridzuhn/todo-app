@@ -27,11 +27,11 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private ImageButton calendarButton;
     private ImageButton priorityButton;
     private ImageButton saveButton;
-    private RadioGroup priorityRadioGroup;
-    private RadioButton selectedRadioButton;
-    private int selectedButtonId;
+    // private RadioGroup priorityRadioGroup;
+    // private RadioButton selectedRadioButton;
+    // private int selectedButtonId;
     private CalendarView calendarView;
-    private Group calendarGroup;
+    // private Group calendarGroup;
 
     public BottomSheet() {
     }
@@ -39,24 +39,30 @@ public class BottomSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_sheet, container, false);
-        calendarGroup = view.findViewById(R.id.calendar_group);
+        calendarButton = view.findViewById(R.id.today_calendar_button);
+        // calendarGroup = view.findViewById(R.id.calendar_group);
         calendarView = view.findViewById(R.id.calendar_view);
         enterTodo = view.findViewById(R.id.enter_todo_et);
         saveButton = view.findViewById(R.id.save_todo_button);
         priorityButton = view.findViewById(R.id.priority_todo_button);
-        Chip todayChip = view.findViewById(R.id.todo_row_chip); // TODO delete or extend
+        // Chip todayChip = view.findViewById(R.id.todo_row_chip); // TODO delete or extend
         return view;
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        calendarButton.setOnClickListener(view12 -> {
+            calendarView.setVisibility(
+                     calendarView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+        });
         saveButton.setOnClickListener(view1 -> {
             String todo = enterTodo.getText().toString().trim();
             if(!TextUtils.isEmpty(todo)){
-                Todo mytodo = new Todo(todo, "lore ipsum", false, true,
+                Todo myTodo = new Todo(todo, "lore ipsum", false, true,
                         Calendar.getInstance().getTime());
-                TodoViewModel.insert(mytodo);
+                TodoViewModel.insert(myTodo);
             }
 
         });
