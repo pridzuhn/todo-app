@@ -108,7 +108,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                 if (isEdit) {
                     Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
                     updateTodo.setTask(todo);
-                    updateTodo.setDescription(todo);
+                    updateTodo.setDescription(description);
                     TodoViewModel.update(updateTodo);
                     sharedViewModel.setIsEdit(false);
                 } else {
