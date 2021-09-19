@@ -1,6 +1,7 @@
 package com.example.todoapp.model;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -20,11 +21,25 @@ public class TodoViewModel extends AndroidViewModel {
         allTodos = repository.getAllTodos();
     }
 
-    public LiveData<List<Todo>> getAllTodos() { return allTodos; }
-    public static void insert(Todo todo) { repository.insert(todo); }
-    public LiveData<Todo> get(int id) { return repository.get(id); }
-    public static void update(Todo todo) { repository.update(todo); }
-    public static void delete(Todo todo) { repository.delete(todo); }
+    public LiveData<List<Todo>> getAllTodos() {
+        return allTodos;
+    }
+
+    public static void insert(Todo todo) {
+        repository.insert(todo);
+    }
+
+    public LiveData<Todo> get(int id) {
+        return repository.get(id);
+    }
+
+    public static void update(Todo todo) {
+        repository.update(todo);
+    }
+
+    public static void delete(Todo todo) {
+        repository.delete(todo);
+    }
 
 
 }

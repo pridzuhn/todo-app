@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.Calendar;
 import java.util.Date;
 
-public class BottomSheet extends BottomSheetDialogFragment{
+public class BottomSheet extends BottomSheetDialogFragment {
 
     private EditText enterTodo;
     private ImageButton calendarButton;
@@ -42,7 +42,7 @@ public class BottomSheet extends BottomSheetDialogFragment{
     }
 
     @Override
-    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_sheet, container, false);
         calendarButton = view.findViewById(R.id.today_calendar_button);
         calendarView = view.findViewById(R.id.calendar_view);
@@ -55,7 +55,7 @@ public class BottomSheet extends BottomSheetDialogFragment{
     @Override
     public void onResume() {
         super.onResume();
-        if(sharedViewModel.getSelectedItem().getValue() != null){
+        if (sharedViewModel.getSelectedItem().getValue() != null) {
             isEdit = sharedViewModel.getIsEdit();
             Todo todo = sharedViewModel.getSelectedItem().getValue();
             enterTodo.setText(todo.getTask());
@@ -70,7 +70,7 @@ public class BottomSheet extends BottomSheetDialogFragment{
         priorityButton.setOnClickListener(view14 -> {
             Utils.hideSoftKeyboard(view14);
 
-            if(priorityButton.getVisibility() == View.VISIBLE){
+            if (priorityButton.getVisibility() == View.VISIBLE) {
                 priorityButton.setVisibility(View.GONE);
                 isFavourite = true;
             } else {
@@ -83,7 +83,7 @@ public class BottomSheet extends BottomSheetDialogFragment{
 
         calendarButton.setOnClickListener(view12 -> {
             calendarView.setVisibility(
-                     calendarView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+                    calendarView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
             Utils.hideSoftKeyboard(view12);
         });
 
@@ -97,7 +97,7 @@ public class BottomSheet extends BottomSheetDialogFragment{
         saveButton.setOnClickListener(view1 -> {
             String todo = enterTodo.getText().toString().trim();
 
-            if(!TextUtils.isEmpty(todo) && dueDate != null) {
+            if (!TextUtils.isEmpty(todo) && dueDate != null) {
                 Todo myTodo = new Todo(todo, description, false, isFavourite,
                         dueDate);
 
@@ -111,11 +111,11 @@ public class BottomSheet extends BottomSheetDialogFragment{
                 }
 
                 enterTodo.setText("");
-                if(this.isVisible()){
+                if (this.isVisible()) {
                     this.dismiss();
                 }
             }
-        //    else {Snackbar.make(saveButton, R.string.empty_field, Snackbar.LENGTH_LONG).show();}
+            //    else {Snackbar.make(saveButton, R.string.empty_field, Snackbar.LENGTH_LONG).show();}
 
         });
     }

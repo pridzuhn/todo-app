@@ -1,21 +1,16 @@
 package com.example.todoapp.adapter;
 
-import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.todoapp.R;
 import com.example.todoapp.Todo;
 import com.example.todoapp.util.Utils;
 import com.google.android.material.chip.Chip;
-
 import java.util.List;
 
 
@@ -51,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return taskList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public AppCompatImageButton todoDeleteButton;
         public AppCompatTextView task;
@@ -74,9 +69,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onClick(View view) {
             Todo currTodo = taskList.get(getAdapterPosition());
             int id = view.getId();
-            if (id == R.id.todo_row_layout){
+            if (id == R.id.todo_row_layout) {
                 onTodoClickListener.onTodoClick(currTodo);
-            } else if (id == R.id.todo_delete_button){
+            } else if (id == R.id.todo_delete_button) {
                 currTodo = taskList.get(getAdapterPosition());
                 onTodoClickListener.onTodoDeleteButtonClick(currTodo);
             }

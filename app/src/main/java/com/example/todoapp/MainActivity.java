@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText etEmail, etPassword;
     private TextInputLayout tilEmail, tilPassword;
-
 
 
     @Override
@@ -43,10 +43,9 @@ public class MainActivity extends AppCompatActivity {
         etEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                if(!isValidEmail(etEmail.getText())){
+                if (!isValidEmail(etEmail.getText())) {
                     tilEmail.setError("Please enter valid email address.");
-                }else
-                {
+                } else {
                     tilEmail.setError(null);
                 }
             }
@@ -65,10 +64,9 @@ public class MainActivity extends AppCompatActivity {
         etPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                if(!isValidPassword(etPassword.getText().toString().trim())){
+                if (!isValidPassword(etPassword.getText().toString().trim())) {
                     tilPassword.setError("Please enter valid password.");
-                }else
-                {
+                } else {
                     tilPassword.setError(null);
                 }
             }
@@ -87,13 +85,11 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isValidEmail(etEmail.getText()) && isValidPassword(etPassword.getText().toString().trim())) {
+                if (isValidEmail(etEmail.getText()) && isValidPassword(etPassword.getText().toString().trim())) {
                     startActivity(new Intent(MainActivity.this, TodoListViewActivity.class));
-                }
-                else if(!isValidEmail(etEmail.getText())){
+                } else if (!isValidEmail(etEmail.getText())) {
                     tilEmail.setError("Please enter valid email address.");
-                }
-                else if(!isValidPassword(etPassword.getText().toString().trim())){
+                } else if (!isValidPassword(etPassword.getText().toString().trim())) {
                     tilPassword.setError("Please enter valid password.");
                 }
             }
@@ -104,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 
-    private boolean isValidPassword(CharSequence input){
+    private boolean isValidPassword(CharSequence input) {
         return Pattern.compile("^[0-9]{6}$").matcher(input).matches();
     }
 

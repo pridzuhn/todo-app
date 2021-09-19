@@ -10,16 +10,19 @@ public class SharedViewModel extends ViewModel {
     private final MutableLiveData<Todo> selectedItem = new MutableLiveData<>();
     private boolean isEdit;
 
-    public void selectItem(Todo todo){
+    public void selectItem(Todo todo) {
         selectedItem.setValue(todo);
     }
+
     public LiveData<Todo> getSelectedItem() {
         return selectedItem;
     }
-    public void setIsEdit(boolean isEdit){
+
+    public void setIsEdit(boolean isEdit) {
         this.isEdit = isEdit;
     }
-    public boolean getIsEdit(){
+
+    public boolean getIsEdit() {
         return isEdit;
     }
 }
