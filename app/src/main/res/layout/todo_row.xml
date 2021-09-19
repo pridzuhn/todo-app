@@ -7,15 +7,25 @@
                                                    android:layout_height="wrap_content"
                                                    android:layout_marginTop="6dp">
 
-    <RadioButton
-            android:id="@+id/todo_radio_button"
-            android:layout_width="39dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="8dp"
-            android:padding="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+<!--    <RadioButton-->
+<!--            android:id="@+id/todo_radio_button"-->
+<!--            android:layout_width="39dp"-->
+<!--            android:layout_height="39dp"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:padding="0dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+    <ImageButton
+        android:id="@+id/todo_delete_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="button image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_delete" />
     <TextView
             android:id="@+id/todo_row_todo"
             android:layout_width="0dp"

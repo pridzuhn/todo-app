@@ -83,8 +83,8 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
     }
 
     @Override
-    public void onTodoRadioButtonClick(Todo todo) {
-        Log.d("Click", "onRadioButtonClick: " + todo);
+    public void onTodoDeleteButtonClick(Todo todo) {
+        Log.d("Click", "onDeleteButtonClick: " + todo);
         TodoViewModel.delete(todo);
         recyclerViewAdapter.notifyDataSetChanged();
     }

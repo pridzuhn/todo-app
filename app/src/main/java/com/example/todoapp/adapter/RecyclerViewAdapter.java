@@ -4,10 +4,10 @@ import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public AppCompatRadioButton radioButton;
+        public AppCompatImageButton todoDeleteButton;
         public AppCompatTextView task;
         public Chip todayChip;
 
@@ -61,12 +61,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            radioButton = itemView.findViewById(R.id.todo_radio_button);
+            todoDeleteButton = itemView.findViewById(R.id.todo_delete_button);
             task = itemView.findViewById(R.id.todo_row_todo);
             todayChip = itemView.findViewById(R.id.todo_row_chip);
             this.onTodoClickListener = todoClickListener;
             itemView.setOnClickListener(this);
-            radioButton.setOnClickListener(this);
+            todoDeleteButton.setOnClickListener(this);
 
         }
 
@@ -76,9 +76,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             int id = view.getId();
             if (id == R.id.todo_row_layout){
                 onTodoClickListener.onTodoClick(currTodo);
-            } else if (id == R.id.todo_radio_button){
+            } else if (id == R.id.todo_delete_button){
                 currTodo = taskList.get(getAdapterPosition());
-                onTodoClickListener.onTodoRadioButtonClick(currTodo);
+                onTodoClickListener.onTodoDeleteButtonClick(currTodo);
             }
         }
     }

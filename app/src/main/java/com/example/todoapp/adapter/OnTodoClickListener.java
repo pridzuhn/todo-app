@@ -4,5 +4,5 @@ import com.example.todoapp.Todo;
 
 public interface OnTodoClickListener {
     void onTodoClick(Todo todo);
-    void onTodoRadioButtonClick(Todo todo);
+    void onTodoDeleteButtonClick(Todo todo);
 }
