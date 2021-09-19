@@ -1,6 +1,8 @@
 package com.example.todoapp;
 
+
 import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,7 +17,6 @@ import com.example.todoapp.model.SharedViewModel;
 import com.example.todoapp.model.TodoViewModel;
 import com.example.todoapp.util.Utils;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,6 +30,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private EditText descTodo;
     private ImageButton calendarButton;
     private ImageButton priorityButton;
+    private ImageButton contactButton;
+    private ImageButton mapsButton;
     private ImageButton saveButton;
     private CalendarView calendarView;
     Calendar calendar = Calendar.getInstance();
@@ -49,6 +52,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_sheet, container, false);
         calendarButton = view.findViewById(R.id.today_calendar_button);
+        contactButton = view.findViewById(R.id.contact_button);
+        mapsButton = view.findViewById(R.id.maps_button);
         calendarView = view.findViewById(R.id.calendar_view);
         enterTodo = view.findViewById(R.id.enter_todo_et);
         descTodo = view.findViewById(R.id.desc_et);
@@ -91,6 +96,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
             Utils.hideSoftKeyboard(view12);
         });
 
+
         calendarView.setOnDateChangeListener((view13, year, month, dayOfMonth) -> {
             Utils.hideSoftKeyboard(view13);
             calendar.clear();
@@ -122,7 +128,6 @@ public class BottomSheet extends BottomSheetDialogFragment {
                     this.dismiss();
                 }
             }
-            //    else {Snackbar.make(saveButton, R.string.empty_field, Snackbar.LENGTH_LONG).show();}
 
         });
     }

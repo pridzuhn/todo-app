@@ -14,11 +14,16 @@ import com.example.todoapp.adapter.OnTodoClickListener;
 import com.example.todoapp.adapter.RecyclerViewAdapter;
 import com.example.todoapp.model.SharedViewModel;
 import com.example.todoapp.model.TodoViewModel;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
-public class TodoListViewActivity extends AppCompatActivity implements OnTodoClickListener {
+public class TodoListViewActivity extends AppCompatActivity implements OnTodoClickListener, OnMapReadyCallback {
 
     private static final String TAG = "ITEM";
     private TodoViewModel todoViewModel;
@@ -43,6 +48,10 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
 
         todoViewModel = new ViewModelProvider.AndroidViewModelFactory(
@@ -87,5 +96,12 @@ public class TodoListViewActivity extends AppCompatActivity implements OnTodoCli
         Log.d("Click", "onDeleteButtonClick: " + todo);
         TodoViewModel.delete(todo);
         recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(0, 0))
+                .title("Marker"));
     }
 }
