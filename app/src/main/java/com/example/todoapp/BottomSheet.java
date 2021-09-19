@@ -25,6 +25,7 @@ import java.util.Date;
 public class BottomSheet extends BottomSheetDialogFragment {
 
     private EditText enterTodo;
+    private EditText descTodo;
     private ImageButton calendarButton;
     private ImageButton priorityButton;
     private ImageButton saveButton;
@@ -47,6 +48,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
         calendarButton = view.findViewById(R.id.today_calendar_button);
         calendarView = view.findViewById(R.id.calendar_view);
         enterTodo = view.findViewById(R.id.enter_todo_et);
+        descTodo = view.findViewById(R.id.desc_et);
         saveButton = view.findViewById(R.id.save_todo_button);
         priorityButton = view.findViewById(R.id.priority_todo_button);
         return view;
@@ -59,6 +61,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
             isEdit = sharedViewModel.getIsEdit();
             Todo todo = sharedViewModel.getSelectedItem().getValue();
             enterTodo.setText(todo.getTask());
+            descTodo.setText(todo.getDescription());
             Log.d("MY", "onViewCreated" + todo.getTask());
         }
     }
@@ -96,6 +99,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
         saveButton.setOnClickListener(view1 -> {
             String todo = enterTodo.getText().toString().trim();
+            String description = descTodo.getText().toString().trim();
 
             if (!TextUtils.isEmpty(todo) && dueDate != null) {
                 Todo myTodo = new Todo(todo, description, false, isFavourite,
@@ -104,6 +108,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                 if (isEdit) {
                     Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
                     updateTodo.setTask(todo);
+                    updateTodo.setDescription(todo);
                     TodoViewModel.update(updateTodo);
                     sharedViewModel.setIsEdit(false);
                 } else {

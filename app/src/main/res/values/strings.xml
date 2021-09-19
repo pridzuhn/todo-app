@@ -8,4 +8,9 @@
     <string name="insert_new_activity">Insert new activity</string>
     <string name="today">today</string>
     <string name="textview">TextView</string>
+    <string name="due_date">Due Date</string>
+    <string name="button_image">button image</string>
+    <string name="todo">TODO</string>
+    <string name="enter_a_new_task">Enter a new task</string>
+    <string name="description">Description</string>
 </resources>
