@@ -28,9 +28,6 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
     private ImageButton calendarButton;
     private ImageButton priorityButton;
     private ImageButton saveButton;
-    // private RadioGroup priorityRadioGroup;
-    // private RadioButton selectedRadioButton;
-    // private int selectedButtonId;
     private CalendarView calendarView;
     private Date dueDate;
     Calendar calendar = Calendar.getInstance();
@@ -69,7 +66,9 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
         super.onViewCreated(view, savedInstanceState);
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
-
+        priorityButton.setOnClickListener(view14 -> {
+            Utils.hideSoftKeyboard(view14);
+        });
 
         calendarButton.setOnClickListener(view12 -> {
             calendarView.setVisibility(
@@ -78,6 +77,7 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
         });
 
         calendarView.setOnDateChangeListener((view13, year, month, dayOfMonth) -> {
+            Utils.hideSoftKeyboard(view13);
             calendar.clear();
             calendar.set(year, month, dayOfMonth);
             dueDate = calendar.getTime();
