@@ -22,18 +22,21 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.Calendar;
 import java.util.Date;
 
-public class BottomSheet extends BottomSheetDialogFragment implements View.OnClickListener {
+public class BottomSheet extends BottomSheetDialogFragment{
 
     private EditText enterTodo;
     private ImageButton calendarButton;
     private ImageButton priorityButton;
     private ImageButton saveButton;
     private CalendarView calendarView;
-    private Date dueDate;
     Calendar calendar = Calendar.getInstance();
     private SharedViewModel sharedViewModel;
     private boolean isEdit;
-    // private Group calendarGroup;
+
+    private Date dueDate;
+    private String description = "Todo Description Text";
+    private boolean isFinished = false;
+    private boolean isFavourite = false;
 
     public BottomSheet() {
     }
@@ -42,12 +45,10 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bottom_sheet, container, false);
         calendarButton = view.findViewById(R.id.today_calendar_button);
-        // calendarGroup = view.findViewById(R.id.calendar_group);
         calendarView = view.findViewById(R.id.calendar_view);
         enterTodo = view.findViewById(R.id.enter_todo_et);
         saveButton = view.findViewById(R.id.save_todo_button);
         priorityButton = view.findViewById(R.id.priority_todo_button);
-        // Chip todayChip = view.findViewById(R.id.todo_row_chip); // TODO delete or extend
         return view;
     }
 
@@ -68,6 +69,16 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
 
         priorityButton.setOnClickListener(view14 -> {
             Utils.hideSoftKeyboard(view14);
+
+            if(priorityButton.getVisibility() == View.VISIBLE){
+                priorityButton.setVisibility(View.GONE);
+                isFavourite = true;
+            } else {
+                priorityButton.setVisibility(View.VISIBLE);
+                isFavourite = false;
+            }
+
+
         });
 
         calendarButton.setOnClickListener(view12 -> {
@@ -87,7 +98,7 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
             String todo = enterTodo.getText().toString().trim();
 
             if(!TextUtils.isEmpty(todo) && dueDate != null) {
-                Todo myTodo = new Todo(todo, "lore ipsum", false, true,
+                Todo myTodo = new Todo(todo, description, false, isFavourite,
                         dueDate);
 
                 if (isEdit) {
@@ -109,8 +120,5 @@ public class BottomSheet extends BottomSheetDialogFragment implements View.OnCli
         });
     }
 
-    @Override
-    public void onClick(View view) {
-        // TODO duedates for today tomorrow next week, if wanted (2:10)
-    }
+
 }

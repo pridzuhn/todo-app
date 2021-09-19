@@ -1,5 +1,6 @@
 package com.example.todoapp.adapter;
 
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public RecyclerViewAdapter(List<Todo> taskList, OnTodoClickListener todoClickListener) {
         this.taskList = taskList;
         this.todoClickListener = todoClickListener;
-
     }
 
 
@@ -41,6 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Todo todo = taskList.get(position);
         String formatted = Utils.formatDate(todo.getDueDate());
+        // TODO insert grey or yellow star for isFavourite
         holder.task.setText(todo.getTask());
         holder.todayChip.setText(formatted);
     }
