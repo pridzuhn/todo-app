@@ -1,5 +1,6 @@
 package com.example.todoapp;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,6 +40,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private boolean isFinished = false;
     private boolean isFavourite = false;
 
+    int counter = 0;
+
     public BottomSheet() {
     }
 
@@ -72,16 +75,14 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
         priorityButton.setOnClickListener(view14 -> {
             Utils.hideSoftKeyboard(view14);
-
-            if (priorityButton.getVisibility() == View.VISIBLE) {
-                priorityButton.setVisibility(View.GONE);
-                isFavourite = true;
-            } else {
-                priorityButton.setVisibility(View.VISIBLE);
+            counter++;
+            if (counter % 2 == 0) {
+                priorityButton.setImageResource(android.R.drawable.btn_star_big_off);
                 isFavourite = false;
+            } else {
+                priorityButton.setImageResource(android.R.drawable.btn_star_big_on);
+                isFavourite = true;
             }
-
-
         });
 
         calendarButton.setOnClickListener(view12 -> {
@@ -109,6 +110,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
                     Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
                     updateTodo.setTask(todo);
                     updateTodo.setDescription(description);
+                    updateTodo.setFavorite(isFavourite);
                     TodoViewModel.update(updateTodo);
                     sharedViewModel.setIsEdit(false);
                 } else {
