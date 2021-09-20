@@ -67,6 +67,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
             Todo todo = sharedViewModel.getSelectedItem().getValue();
             enterTodo.setText(todo.getTask());
             descTodo.setText(todo.getDescription());
+            calendarView.setDate(Converter.dateToTimestamp(todo.getDueDate()));
             if(todo.isFavorite == true){
                 priorityButton.setImageResource(android.R.drawable.btn_star_big_on);
             } else priorityButton.setImageResource(android.R.drawable.btn_star_big_off);
