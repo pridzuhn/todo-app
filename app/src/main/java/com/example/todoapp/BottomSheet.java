@@ -27,6 +27,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private EditText descTodo;
     private ImageButton calendarButton;
     private ImageButton priorityButton;
+    private ImageButton doneButton;
     private ImageButton contactButton;
     private ImageButton mapsButton;
     private ImageButton saveButton;
@@ -54,6 +55,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
         descTodo = view.findViewById(R.id.desc_et);
         saveButton = view.findViewById(R.id.save_todo_button);
         priorityButton = view.findViewById(R.id.priority_todo_button);
+        doneButton = view.findViewById(R.id.done_button);
         return view;
     }
 
@@ -68,6 +70,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
             if(todo.isFavorite == true){
                 priorityButton.setImageResource(android.R.drawable.btn_star_big_on);
             } else priorityButton.setImageResource(android.R.drawable.btn_star_big_off);
+            if(todo.isFinished == true){
+                doneButton.setImageResource(android.R.drawable.checkbox_on_background);
+            } else doneButton.setImageResource(android.R.drawable.checkbox_off_background);
             Log.d("MY", "onViewCreated" + todo.getTask());
         }
     }
@@ -75,6 +80,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
 
         priorityButton.setOnClickListener(view14 -> {
             Utils.hideSoftKeyboard(view14);
@@ -88,6 +94,19 @@ public class BottomSheet extends BottomSheetDialogFragment {
             }
         });
 
+        doneButton.setOnClickListener(view44 -> {
+            Utils.hideSoftKeyboard(view44);
+            counter++;
+            if (counter % 2 == 0) {
+                doneButton.setImageResource(android.R.drawable.checkbox_off_background);
+                isFinished = false;
+            } else {
+                doneButton.setImageResource(android.R.drawable.checkbox_on_background);
+                isFinished = true;
+            }
+        });
+
+
         calendarButton.setOnClickListener(view12 -> {
             calendarView.setVisibility(
                     calendarView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
@@ -97,9 +116,12 @@ public class BottomSheet extends BottomSheetDialogFragment {
 
         calendarView.setOnDateChangeListener((view13, year, month, dayOfMonth) -> {
             Utils.hideSoftKeyboard(view13);
-            calendar.clear();
-            calendar.set(year, month, dayOfMonth);
-            dueDate = calendar.getTime();
+            if(dueDate == null) {
+                calendar.clear();
+                calendar.set(year, month, dayOfMonth);
+                dueDate = calendar.getTime();
+            }
+
         });
 
         saveButton.setOnClickListener(view1 -> {
@@ -122,10 +144,11 @@ public class BottomSheet extends BottomSheetDialogFragment {
                 } else {
                     TodoViewModel.insert(myTodo);
                 }
-
                 enterTodo.setText("");
                 descTodo.setText("");
                 isFavourite = false;
+                isFinished = false;
+                dueDate = null;
                 if (this.isVisible()) {
                     this.dismiss();
                 }
