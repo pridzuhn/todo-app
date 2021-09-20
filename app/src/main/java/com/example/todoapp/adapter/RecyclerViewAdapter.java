@@ -36,7 +36,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Todo todo = taskList.get(position);
         String formatted = Utils.formatDate(todo.getDueDate());
-        // TODO insert grey or yellow star for isFavourite
         holder.task.setText(todo.getTask());
         holder.todayChip.setText(formatted);
     }
