@@ -1,8 +1,5 @@
 package com.example.todoapp;
 
-
-import android.graphics.drawable.Drawable;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,11 +34,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
     Calendar calendar = Calendar.getInstance();
     private SharedViewModel sharedViewModel;
     private boolean isEdit;
-
     private Date dueDate;
-    private String description = "Todo Description Text";
-    private boolean isFinished = false;
     private boolean isFavourite = false;
+    private boolean isFinished = false;
 
     int counter = 0;
 
@@ -70,6 +65,9 @@ public class BottomSheet extends BottomSheetDialogFragment {
             Todo todo = sharedViewModel.getSelectedItem().getValue();
             enterTodo.setText(todo.getTask());
             descTodo.setText(todo.getDescription());
+            if(todo.isFavorite == true){
+                priorityButton.setImageResource(android.R.drawable.btn_star_big_on);
+            } else priorityButton.setImageResource(android.R.drawable.btn_star_big_off);
             Log.d("MY", "onViewCreated" + todo.getTask());
         }
     }
@@ -109,14 +107,16 @@ public class BottomSheet extends BottomSheetDialogFragment {
             String description = descTodo.getText().toString().trim();
 
             if (!TextUtils.isEmpty(todo) && dueDate != null) {
-                Todo myTodo = new Todo(todo, description, false, isFavourite,
+                Todo myTodo = new Todo(todo, description,isFinished, isFavourite,
                         dueDate);
 
                 if (isEdit) {
                     Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
                     updateTodo.setTask(todo);
                     updateTodo.setDescription(description);
+                    updateTodo.setDueDate(dueDate);
                     updateTodo.setFavorite(isFavourite);
+                    updateTodo.setFinished(isFinished);
                     TodoViewModel.update(updateTodo);
                     sharedViewModel.setIsEdit(false);
                 } else {
@@ -124,6 +124,8 @@ public class BottomSheet extends BottomSheetDialogFragment {
                 }
 
                 enterTodo.setText("");
+                descTodo.setText("");
+                isFavourite = false;
                 if (this.isVisible()) {
                     this.dismiss();
                 }

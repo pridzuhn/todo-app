@@ -48,7 +48,6 @@
             android:contentDescription="@string/button_image"
             android:clickable="true"
             app:srcCompat="@android:drawable/btn_star_big_off"
-            android:clickable="true"
             app:layout_constraintStart_toEndOf="@+id/enter_todo_et"
             android:layout_marginEnd="6dp" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="10dp" android:focusable="true"/>
@@ -113,23 +112,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/desc_et" android:layout_marginTop="50dp"/>
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:id="@+id/map"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+<!--    <fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:map="http://schemas.android.com/apk/res-auto"-->
+<!--    android:name="com.google.android.gms.maps.SupportMapFragment"-->
+<!--    android:id="@+id/map"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"/>-->
 
-    <androidx.constraintlayout.widget.Group
-            android:id="@+id/calendar_group"
-            android:layout_width="280dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            app:constraint_referenced_ids="calendar_view, textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.038" android:layout_marginStart="32dp"
-    />
+<!--    <androidx.constraintlayout.widget.Group-->
+<!--            android:id="@+id/calendar_group"-->
+<!--            android:layout_width="280dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:visibility="gone"-->
+<!--            app:constraint_referenced_ids="calendar_view, textView"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.038" android:layout_marginStart="32dp"-->
+<!--    />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
