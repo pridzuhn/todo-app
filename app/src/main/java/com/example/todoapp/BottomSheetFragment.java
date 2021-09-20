@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.Calendar;
 import java.util.Date;
 
-public class BottomSheet extends BottomSheetDialogFragment {
+public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private EditText enterTodo;
     private EditText descTodo;
@@ -39,7 +39,7 @@ public class BottomSheet extends BottomSheetDialogFragment {
     private boolean isFinished = false;
     private boolean isFavourite = false;
 
-    public BottomSheet() {
+    public BottomSheetFragment() {
     }
 
     @Override
